@@ -1,0 +1,20 @@
+{
+  "_comment": "People and email are stored as GitHub secrets (SEARCH_PEOPLE and NOTIFICATION_EMAIL). Only states are configured here.",
+
+  "states": ["TN", "IA"],
+
+  "_available_states": {
+    "TN": "Tennessee — unclaimedproperty.tn.gov",
+    "IA": "Iowa — unclaimedproperty.iowa.gov",
+    "TX": "Texas — claimittexas.gov",
+    "FL": "Florida — fltreasurehunt.gov",
+    "CA": "California — claimit.ca.gov"
+  },
+
+  "_notes": {
+    "adding_states": "Add a state code from _available_states to the states array above.",
+    "people": "Stored in GitHub secret SEARCH_PEOPLE as a JSON array: [{\"first_name\":\"Aaron\",\"last_name\":\"Harlow\"}, ...]",
+    "email": "Stored in GitHub secret NOTIFICATION_EMAIL",
+    "schedule": "Edit the cron line in .github/workflows/check.yml"
+  }
+}
