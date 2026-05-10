@@ -110,7 +110,7 @@ def build_html(results, total_hits, hits):
     <p style="margin:0;font-size:11px;color:rgba(255,255,255,.8);letter-spacing:.1em;text-transform:uppercase;">
       Unclaimed Funds Monitor</p>
     <h1 style="margin:8px 0 4px;font-size:26px;font-weight:700;color:#fff;">
-      {'💰 ' if total_hits else '✓ '}{hero}</h1>
+      {hero}</h1>
     <p style="margin:0;font-size:14px;color:rgba(255,255,255,.85);">{hero_sub}</p>
   </td></tr>
 
@@ -132,7 +132,7 @@ def build_html(results, total_hits, hits):
     <p style="margin:0;font-size:12px;color:#9ca3af;">
       Results are emailed only — nothing is stored publicly.<br>
       Searching is always free. Never pay a third-party finder fee.
-      {"<br>⚠️ " + str(err_count) + " search(es) failed this run." if err_count else ""}
+      {"<br>WARNING: " + str(err_count) + " search(es) failed this run." if err_count else ""}
     </p>
   </td></tr>
 
@@ -150,7 +150,7 @@ def build_text(results, total_hits, hits):
 
     lines = [f"Unclaimed Funds Monitor — {date_str}", "="*45, ""]
     if total_hits:
-        lines.append(f"💰 {total_hits} match{'es' if total_hits!=1 else ''} found!\n")
+        lines.append(f"{total_hits} match{'es' if total_hits!=1 else ''} found\n")
         for h in hits:
             p = h["person"]
             lines.append(f"{p.get('first_name','')} {p['last_name']} — {h['state_name']} ({h['count']} match{'es' if h['count']!=1 else ''})")
@@ -159,7 +159,7 @@ def build_text(results, total_hits, hits):
                 lines.append(f"  • {f['name']} | {f['holder']} | {f['type']} | {f['amount'] or 'amount unknown'}")
             lines.append(f"  → Claim: {h['claim_url']}\n")
     else:
-        lines.append("✓ No matches found this month.\n")
+        lines.append("No matches found this month.\n")
 
     searches = results.get("searches", [])
     clean    = [s for s in searches if s["count"] == 0 and "error" not in s]
@@ -223,8 +223,8 @@ def main():
     except Exception:
         date_str = generated
 
-    subject = (f"💰 {total_hits} Unclaimed Match{'es' if total_hits!=1 else ''} Found — {date_str}"
-               if total_hits else f"✓ Unclaimed Funds — No Matches ({date_str})")
+    subject = (f"[Unclaimed Funds] {total_hits} match{'es' if total_hits!=1 else ''} found — {date_str}"
+               if total_hits else f"[Unclaimed Funds] No matches — {date_str}")
 
     html = build_html(results, total_hits, hits)
     text = build_text(results, total_hits, hits)
