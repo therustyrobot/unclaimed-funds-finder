@@ -90,7 +90,7 @@ Available states:
 | `ID` | Idaho | yourmoney.idaho.gov |
 | `IL` | Illinois | icash.illinoistreasurer.gov |
 | `IN` | Indiana | indianaunclaimed.gov |
-| `IA` | Iowa | unclaimedproperty.iowa.gov |
+| `IA` | Iowa | greatiowatreasurehunt.gov |
 | `KS` | Kansas | kansascash.ks.gov |
 | `KY` | Kentucky | treasury.ky.gov/unclaimedproperty |
 | `LA` | Louisiana | treasury.la.gov/unclaimed-property |

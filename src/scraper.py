@@ -26,10 +26,10 @@ STATES = {
     },
     "IA": {
         "name": "Iowa",
-        "base_url": "https://unclaimedproperty.iowa.gov",
-        "search_page": "https://unclaimedproperty.iowa.gov/app/claim-search",
+        "base_url": "https://www.greatiowatreasurehunt.gov",
+        "search_page": "https://www.greatiowatreasurehunt.gov/app/claim-search",
         "api_path": "/SWS/properties",
-        "claim_url": "https://unclaimedproperty.iowa.gov/app/claim-search",
+        "claim_url": "https://www.greatiowatreasurehunt.gov/app/claim-search",
     },
     "TX": {
         "name": "Texas",
@@ -245,10 +245,17 @@ def main():
     print(f"\nResults written to {RESULTS_PATH} (temp, not committed)")
 
     total = sum(s["count"] for s in results["searches"])
+    errors = [s for s in results["searches"] if "error" in s]
     print(f"Total matches: {total}")
     for h in [s for s in results["searches"] if s["count"] > 0]:
         p = h["person"]
-        print(f"  ✓ {p.get('first_name','')} {p['last_name']} in {h['state_name']}: {h['count']} match(es)")
+        print(f"  MATCH: {p.get('first_name','')} {p['last_name']} in {h['state_name']}: {h['count']} match(es)")
+    if errors:
+        print(f"\nERROR: {len(errors)} search(es) failed:", file=sys.stderr)
+        for s in errors:
+            p = s["person"]
+            print(f"  {p.get('first_name','')} {p['last_name']} / {s['state_name']}: {s['error']}", file=sys.stderr)
+        sys.exit(1)
 
 
 if __name__ == "__main__":
