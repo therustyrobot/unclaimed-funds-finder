@@ -241,7 +241,9 @@ def main():
     from_email = os.environ.get("SENDGRID_FROM_EMAIL", "").strip() or to_email
 
     print(f"Sending email to {to_email}...")
-    send_sendgrid(api_key, to_email, from_email, subject, html, text)
+    ok = send_sendgrid(api_key, to_email, from_email, subject, html, text)
+    if not ok:
+        sys.exit(1)
 
 
 if __name__ == "__main__":
