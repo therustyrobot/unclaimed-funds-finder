@@ -1,6 +1,6 @@
 <img width="1376" height="768" alt="Unclaimed_Funds_Finder_title_202605092114" src="https://github.com/user-attachments/assets/dc890090-2ba2-4c49-b227-944d0e3bbe9b" />
 
-# 💰 Unclaimed Funds Finder
+# Unclaimed Funds Finder
 
 > **Billions of dollars in unclaimed property are sitting in state government vaults right now — and some of it may have your name on it.**
 
@@ -8,14 +8,18 @@ Unclaimed property is money or assets that have been turned over to the state af
 
 This tool automatically searches official state unclaimed property databases on the **1st of every month** and emails results directly to you — nothing is stored publicly anywhere.
 
-## ⚙️ How it works
+---
+
+## How it works
 
 1. GitHub Actions fires on the 1st of every month at 9am CT
 2. Playwright (headless Chrome) searches each configured state's official unclaimed property site for every person in your `SEARCH_PEOPLE` secret
 3. Results are sent by email via SendGrid — full details inline, with direct links to claim
 4. Nothing is committed back to the repo. Results exist only in the email.
 
-## 🔒 Privacy model
+---
+
+## Privacy model
 
 | What | Where | Public? |
 |------|-------|---------|
@@ -24,7 +28,9 @@ This tool automatically searches official state unclaimed property databases on 
 | Search results | Emailed, then discarded | ✗ Never |
 | Repo contents | `config.json` (states only), source code | ✓ Yes, but contains no personal data |
 
-## 🚀 Setup
+---
+
+## Setup
 
 ### 1. Fork this repo
 
@@ -52,7 +58,9 @@ you@example.com
 ### 3. Run it
 Actions → Check Unclaimed Funds → Run workflow
 
-## 🛠️ Customizing
+---
+
+## Customizing
 
 ### Add / remove states
 Edit the `states` array in `config.json`:
@@ -127,11 +135,15 @@ Edit the `cron` line in `.github/workflows/check.yml`:
 0 15 1 */3 *  ← every 3 months
 ```
 
-## 📋 Notes
+---
+
+## Notes
 
 - Searching is 100% free — these are official government databases
 - Never pay a third-party "finder fee" to claim funds you locate here
 - The scraper uses a real headless Chromium browser to handle Cloudflare protections naturally
+
+---
 
 ## ⚠️ Please be responsible
 
