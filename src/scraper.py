@@ -152,13 +152,11 @@ async def search_person_state(browser, state_cfg, person):
             )
 
             if not api_resp.get("ok"):
-                print(f"    API error: {api_resp.get('error','')[:120]}")
-                break
+                raise RuntimeError(f"API error: {api_resp.get('error','')[:120]}")
 
             data = api_resp["data"]
             if data.get("status") in (400, 401, 403, 500):
-                print(f"    API status {data.get('status')}: {data.get('clientMessage','')}")
-                break
+                raise RuntimeError(f"API status {data.get('status')}: {data.get('clientMessage','')}")
 
             batch = data.get("content") or data.get("properties") or []
             if not batch:
@@ -172,6 +170,7 @@ async def search_person_state(browser, state_cfg, person):
 
     except Exception as e:
         print(f"    Exception: {e}")
+        raise
     finally:
         page.remove_listener("request", on_request)
         await ctx.close()
